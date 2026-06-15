@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> Scientific Calculator</title>
+</head>
+<style>
+    body{
+        font-family: Arial, sans-serif;
+        background-color: lightblue;
+        padding: 20px;
+    }
+
+    h2{
+        color: #333;
+        text-align: center;
+    }
+
+    label{
+        font-weight: bold;
+    }
+
+    input{
+        padding: 8px;
+        margin: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    button{
+        padding: 8px 15px;
+        margin: 5px;
+        border: none;
+        border-radius: 5px;
+        background-color: #007bff;
+        color: white;
+        cursor: pointer;
+    }
+
+    button:hover{
+        background-color: #0056b3;
+    }
+
+    #ans{
+        margin-top: 20px;
+        color: darkgreen;
+        text-align: center;
+    }
+
+    .container{
+        width: 700px;
+        margin: auto;
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px lightgray;
+    }
+
+    .section{
+        margin-top: 20px;
+    }
+</style>
+<body>
+    <h2> Scientific Calculator</h2>
+    <b><label>Enter First Number : </label></b><br>
+    <input type="number" id="num1"><br><br>
+    <b><lable>Enter Second Number : </lable></b><br><br>
+    <input type="number" id="num2"><br><br>
+    <button onclick="add()">Addition</button>
+    <button onclick="sub()">Subtraction</button>
+    <button onclick="mul()">Multiplication</button>
+    <button onclick="div()">Division</button>
+    <button onclick="pow()">Power</button>
+    <br><br>
+
+    <input type="number" id="num" placeholder="Enter Number">
+    <button onclick="sqrt()">Square Root</button>
+    <button onclick="log()">Log</button>
+    <br><br>
+
+    <input type="number" id="number" placeholder="Enter Angle">
+    <button onclick="sin()">Sin</button>
+    <button onclick="cos()">Cos</button>
+    <button onclick="tan()">Tan</button>
+    <br>
+    <button onclick="spiral()">Spiral Matrix</button>
+
+    <h2 id="ans"></h2>
+<script>
+    async function spiral(){
+        let response=await
+            fetch(`http://localhost:8080/spiral`);
+        let text = await response.text();
+        document.getElementById("ans").innerText=text;
+    }
+    async function add(){
+        let n1= Number(document.getElementById("num1").value);
+        let n2 =Number(document.getElementById("num2").value);
+        let response=await
+            fetch(`http://localhost:8080/calc/add/${n1}/${n2}`);
+        let text= await response.text();
+        document.getElementById("ans").innerText=text;
+    }
+    async function sub(){
+        let n1= Number(document.getElementById("num1").value);
+        let n2 =Number(document.getElementById("num2").value);
+        let response=await
+            fetch(`http://localhost:8080/calc/sub/${n1}/${n2}`);
+        let text= await response.text();
+        document.getElementById("ans").innerText=text;
+    }
+    async function mul(){
+        let n1= Number(document.getElementById("num1").value);
+        let n2 =Number(document.getElementById("num2").value);
+        let response=await
+            fetch(`http://localhost:8080/calc/mul/${n1}/${n2}`);
+        let text= await response.text();
+        document.getElementById("ans").innerText=text;
+    }
+    async function div(){
+        let n1= Number(document.getElementById("num1").value);
+        let n2 =Number(document.getElementById("num2").value);
+        let response=await
+            fetch(`http://localhost:8080/calc/div/${n1}/${n2}`);
+        let text= await response.text();
+        document.getElementById("ans").innerText=text;
+    }
+    async function pow(){
+        let n1= Number(document.getElementById("num1").value);
+        let n2 =Number(document.getElementById("num2").value);
+        let response=await
+            fetch(`http://localhost:8080/calc/pow/${n1}/${n2}`);
+        let text= await response.text();
+        document.getElementById("ans").innerText=text;
+    }
+    async function sqrt(){
+        let num= Number(document.getElementById("num").value);
+        let response=await
+            fetch(`http://localhost:8080/calc/sqrt/${num}`);
+        let text= await response.text();
+        document.getElementById("ans").innerText=text;
+    }
+    async function log() {
+        let num = document.getElementById("num").value;
+        let response = await
+            fetch(`http://localhost:8080/calc/log/${num}`);
+        document.getElementById("ans").innerText = await response.text();
+    }
+    async function sin() {
+        let number = document.getElementById("number").value;
+
+        let response = await
+            fetch(`http://localhost:8080/calc/sin/${number}`);
+        document.getElementById("ans").innerText = await response.text();
+    }
+
+    async function cos() {
+        let number = document.getElementById("number").value;
+
+        let response = await
+            fetch(`http://localhost:8080/calc/cos/${number}`);
+        document.getElementById("ans").innerText = await response.text();
+    }
+
+    async function tan() {
+        let number = document.getElementById("number").value;
+
+        let response = await
+            fetch(`http://localhost:8080/calc/tan/${number}`);
+        document.getElementById("ans").innerText = await response.text();
+    }
+
+</script>
+
+</body>
+</html>

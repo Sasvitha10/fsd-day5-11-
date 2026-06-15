@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Addition</title>
+</head>
+<body>
+    <b><label>Enter First Number : </label></b><br>
+    <input type="number" id="num1"><br><br>
+    <b><lable>Enter Second Number : </lable></b><br><br>
+    <input type="number" id="num2"><br><br>
+    <button onclick="addd()">Addition</button>
+
+    <h2 id="ans"></h2>
+</body>
+<script>
+    async function addd(){
+        let n1= Number(document.getElementById("num1").value);
+        let n2 =Number(document.getElementById("num2").value);
+        let response=await
+            fetch(`http://localhost:8080/calc/addd/${n1}/${n2}`);
+        let text= await response.text();
+        document.getElementById("ans").innerText=text;
+    }
+</script>
+
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Avengers</title>
+    <h1>Avengers</h1>
+</head>
+<body>
+    <button onclick="add()">Add Record</button>
+    <p id="ans"></p>
+
+
+<script>
+    async function add(){
+        let response= await
+            fetch(`http://localhost:9091/heroes`);
+        let text = await response.text();
+        document.getElementById("ans").innerText = text;
+    }
+</script>
+</body>
+</html>
